@@ -93,6 +93,9 @@ const CartScreen = ({ match, location, history }) => {
                 </Row>
               </ListGroup.Item>
             ))}
+             <Message>
+            <Link to="/">Add more items to Cart</Link>
+          </Message>
           </ListGroup>
         )}
       </Col>

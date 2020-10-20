@@ -31,7 +31,7 @@ const ProductScreen = ({ match }) => {
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
-        <Row>
+        product._id !== match.params.id ? <Loader /> : <Row>
           <Col md={6}>
             <Image src={product.image} alt={product.name} fluid />{" "}
             {/* fluid to make image inside container */}

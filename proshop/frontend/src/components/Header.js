@@ -7,7 +7,7 @@ import { logout } from "../actions/userActions";
 const Header = () => {
   const dispatch = useDispatch();
 
-  const { cart : {cartItems}, userLogin : {userInfo} } = useSelector((state) => state);
+  const { cart : {cartItems}, userLogin : {userInfo}, userDetails: {user} } = useSelector((state) => state);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -56,7 +56,7 @@ const Header = () => {
                   </Nav.Link>
                   <NavDropdown
                     className="desktop"
-                    title={userInfo.name}
+                    title={(user && user.name)? user.name : userInfo.name}
                     id="username"
                   >
                     <LinkContainer to="/profile">

@@ -56,7 +56,7 @@ const ProfileScreen = ({ location, history }) => {
               required
               type="text"
               placeholder="Enter name"
-              value={name}
+              value={name? name : ''}
               onChange={(e) => setName(e.target.value)}
             ></Form.Control>
           </Form.Group>
@@ -67,7 +67,7 @@ const ProfileScreen = ({ location, history }) => {
               required
               type="email"
               placeholder="Enter email"
-              value={email}
+              value={email? email : ''}
               onChange={(e) => setEmail(e.target.value)}
             ></Form.Control>
           </Form.Group>

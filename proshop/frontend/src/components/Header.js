@@ -2,15 +2,18 @@ import React from "react";
 import {useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { logout } from '../actions/userActions'
 
 const Header = () => {
+
+  const dispatch = useDispatch()
 
   const {cart, userLogin} = useSelector((state) => state);
   const { cartItems } = cart;
   const { userInfo } = userLogin
 
   const logoutHandler = () =>{
-    console.log('logout')
+    dispatch(logout())
   }
 
   const subTotal = cartItems.length > 0 ? cartItems.reduce((acc, item) => acc + item.qty, 0) : 0

@@ -38,17 +38,7 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               {/* Moves cart etc to left*/}
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  {cartItems.length === 0 ? (
-                    <i className="fas fa-shopping-cart"></i>
-                  ) : (
-                    <i className="fa fa-cart-plus"></i>
-                  )}{" "}
-                  <span>Cart</span>
-                  {subTotal > 0 ? `(${subTotal})` : null}
-                </Nav.Link>
-              </LinkContainer>
+              
               {userInfo ? (
                 <>
                 <Nav.Link>
@@ -87,6 +77,17 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
+              <LinkContainer to="/cart">
+                <Nav.Link>
+                  {cartItems.length === 0 ? (
+                    <i className="fas fa-shopping-cart"></i>
+                  ) : (
+                    <i className="fa fa-cart-plus"></i>
+                  )}{" "}
+                  <span>Cart</span>
+                  {subTotal > 0 ? `(${subTotal})` : null}
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

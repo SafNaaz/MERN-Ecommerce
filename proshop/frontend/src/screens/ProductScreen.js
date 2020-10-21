@@ -39,7 +39,7 @@ const ProductScreen = ({ history, match }) => {
 
   return (
     <>
-    <h1>{product.name}</h1>
+    <h1>{product._id === match.params.id && product.name}</h1>
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
@@ -58,16 +58,17 @@ const ProductScreen = ({ history, match }) => {
           <Col md={3}>
             <ListGroup variant="flush">
               {/* flush - without borders */}
-              <ListGroup.Item>
+              {/* <ListGroup.Item>
                 <h3>{product.name}</h3>
-              </ListGroup.Item>
+              </ListGroup.Item> */}
+              <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
               <ListGroup.Item>
                 <Rating
                   value={product.rating}
                   text={`${product.numReviews} reviews`}
                 />
               </ListGroup.Item>
-              <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
+              
               <ListGroup.Item>
                 Description : {product.description}
               </ListGroup.Item>

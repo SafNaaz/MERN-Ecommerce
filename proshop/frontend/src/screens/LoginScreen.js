@@ -39,6 +39,7 @@ const LoginScreen = ({ location, history }) => {
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
+            required
             type="email"
             placeholder="Enter email"
             value={email}
@@ -49,6 +50,7 @@ const LoginScreen = ({ location, history }) => {
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            required
             type="password"
             placeholder="Enter password"
             value={password}

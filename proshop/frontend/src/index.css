@@ -9,7 +9,7 @@ h3 {
 h1{
     font-size: 1.8rem;
     padding:0.1rem 0;
-    margin-top: 6rem;
+    margin-top: 4rem;
 }
 
 h2{
@@ -35,4 +35,8 @@ h2{
 Nav span{
     display: none;
 }
+}
+
+header{
+    height: 1rem;
 }

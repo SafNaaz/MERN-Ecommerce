@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar fixed="top" bg="dark" variant="dark" collapseOnSelect>
+      <Navbar className="py-3" fixed="top" bg="dark" variant="dark" collapseOnSelect>
         <Container>{/* Moves brand etc in a proper width*/}
           <LinkContainer to="/">
             <Navbar.Brand>ProShop</Navbar.Brand>

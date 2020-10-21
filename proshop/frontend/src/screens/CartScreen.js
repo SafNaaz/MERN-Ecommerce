@@ -13,12 +13,14 @@ import {
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 
-const CartScreen = ({ match, location, history }) => {
+  const CartScreen = ({ match, location, history }) => {
 
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+
+  const subTotal = cartItems.length > 0 ? cartItems.reduce((acc, item) => acc + item.qty, 0) : 0
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
@@ -31,8 +33,7 @@ const CartScreen = ({ match, location, history }) => {
   return (
     <>
     <h1>
-          Shopping Cart - {cartItems.length}{" "}
-          {cartItems.length === 1 ? "Item" : "Items"}
+          Shopping Cart
         </h1>
     <Row>
       
@@ -95,8 +96,8 @@ const CartScreen = ({ match, location, history }) => {
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                items{" "}
+                Subtotal ({subTotal})
+                {subTotal === 1 ? " Item" : " Items"}
               </h2>
               $
               {cartItems

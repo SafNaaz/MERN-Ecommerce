@@ -8,6 +8,8 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  const subTotal = cartItems.length > 0 ? cartItems.reduce((acc, item) => acc + item.qty, 0) : 0
+
   return (
     <header>
       <Navbar className="py-3" fixed="top" bg="dark" variant="dark" collapseOnSelect>
@@ -21,7 +23,7 @@ const Header = () => {
               <LinkContainer to="/cart">
                 <Nav.Link>
                 {cartItems.length === 0 ? <i className="fas fa-shopping-cart"></i> : <i className="fa fa-cart-plus"></i>}
-                {' '}<span>Cart</span>{cartItems.length > 0 ? `(${cartItems.length})` : null}
+                {' '}<span>Cart</span>{subTotal > 0 ? `(${subTotal})` : null}
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">

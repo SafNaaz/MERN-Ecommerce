@@ -47,6 +47,7 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
+  //dispatch({type:'CART_EMPTY'})
 };
 
 export const register = (name, email, password) => async (dispatch, getState) => {
@@ -76,6 +77,8 @@ export const register = (name, email, password) => async (dispatch, getState) =>
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
+
+    //dispatch({type:'CART_EMPTY'})
 
     getState().userRegister = {}
 

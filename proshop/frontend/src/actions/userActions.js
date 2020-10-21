@@ -81,6 +81,8 @@ export const register = (name, email, password) => async (dispatch, getState) =>
     //dispatch({type:'CART_EMPTY'})
 
     getState().userRegister = {}
+    //getState().cart.cartItems = []
+    //localStorage.removeItem("cartItems");
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {

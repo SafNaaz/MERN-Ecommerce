@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar fixed="top" bg="dark" variant="dark" collapseOnSelect>
         <Container>{/* Moves brand etc in a proper width*/}
           <LinkContainer to="/">
             <Navbar.Brand>ProShop</Navbar.Brand>
@@ -21,12 +21,12 @@ const Header = () => {
               <LinkContainer to="/cart">
                 <Nav.Link>
                 {cartItems.length === 0 ? <i className="fas fa-shopping-cart"></i> : <i className="fa fa-cart-plus"></i>}
-                {' '}Cart{cartItems.length > 0 ? `(${cartItems.length})` : null}
+                {' '}<span>Cart</span>{cartItems.length > 0 ? `(${cartItems.length})` : null}
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
                 <Nav.Link>
-                  <i className="fas fa-user"></i> Sign In
+                  <i className="fas fa-user"></i> <span>Sign In</span>
                 </Nav.Link>
               </LinkContainer>
             </Nav>

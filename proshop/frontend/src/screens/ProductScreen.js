@@ -39,6 +39,7 @@ const ProductScreen = ({ history, match }) => {
 
   return (
     <>
+    <h1>{product.name}</h1>
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
@@ -128,6 +129,9 @@ const ProductScreen = ({ history, match }) => {
           </Col>
         </Row>
       )}
+      <Link className="btn btn-light my-3" to="/">
+        Go Back
+      </Link>
     </>
   );
 };

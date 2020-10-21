@@ -1,12 +1,17 @@
 import React from "react";
-import {useSelector } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 
 const Header = () => {
 
-  const cart = useSelector((state) => state.cart);
+  const {cart, userLogin} = useSelector((state) => state);
   const { cartItems } = cart;
+  const { userInfo } = userLogin
+
+  const logoutHandler = () =>{
+    console.log('logout')
+  }
 
   const subTotal = cartItems.length > 0 ? cartItems.reduce((acc, item) => acc + item.qty, 0) : 0
 
@@ -26,11 +31,19 @@ const Header = () => {
                 {' '}<span>Cart</span>{subTotal > 0 ? `(${subTotal})` : null}
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/login">
-                <Nav.Link>
-                  <i className="fas fa-user"></i> <span>Sign In</span>
-                </Nav.Link>
-              </LinkContainer>
+              {userInfo ? (
+                <NavDropdown title={userInfo.name} id='username'>
+                  <LinkContainer to='/profile'>
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              ): <LinkContainer to="/login">
+              <Nav.Link>
+                <i className="fas fa-user"></i> <span>Sign In</span>
+              </Nav.Link>
+            </LinkContainer>}
+              
             </Nav>
           </Navbar.Collapse>
         </Container>

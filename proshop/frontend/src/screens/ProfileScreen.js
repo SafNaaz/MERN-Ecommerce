@@ -3,7 +3,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getUserDetails } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -19,6 +19,7 @@ const ProfileScreen = ({ location, history }) => {
   const { loading, error, user } = userDetails;
 
   const { userInfo } = useSelector((state) => state.userLogin);
+  const { success } = useSelector((state) => state.userUpdateProfile);
 
   useEffect(() => {
     if (!userInfo) {
@@ -38,7 +39,7 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      //dispatch update profile
+      dispatch(updateUserProfile({id: user._id, name, email, password}))
     }
   };
 
@@ -48,6 +49,7 @@ const ProfileScreen = ({ location, history }) => {
         <h2 className="profile">User Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
+        {success && <Message variant="success">Profile Updated - Refresh the page or Relogin again to reflect all the changes</Message>}
         {loading ? (
           <Loader />
         ) : (
@@ -77,7 +79,6 @@ const ProfileScreen = ({ location, history }) => {
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                required
                 type="password"
                 placeholder="Enter password"
                 value={password}
@@ -88,7 +89,6 @@ const ProfileScreen = ({ location, history }) => {
             <Form.Group controlId="confirmPassword">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
-                required
                 type="password"
                 placeholder="Confirm password"
                 value={confirmPassword}

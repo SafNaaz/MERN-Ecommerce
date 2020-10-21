@@ -35,7 +35,19 @@ h2{
 Nav span{
     display: none;
 }
+
+.desktop{
+    display: none;
 }
+}
+
+@media (min-width: 400px) {
+    
+    .mobile{
+        display: none;
+    }
+    }
+
 
 header{
     height: 1rem;
@@ -52,4 +64,9 @@ html {
 /* Optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
     background: #FF0000;
+}
+
+.dropdown-menu {
+    right: 0;
+    left: auto;
 }

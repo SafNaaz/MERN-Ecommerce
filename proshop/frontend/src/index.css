@@ -46,6 +46,11 @@ Nav span{
     .mobile{
         display: none;
     }
+
+    #profile-icon:link {
+        display: none;
+    }
+
     }
 
 

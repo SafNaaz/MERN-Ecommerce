@@ -47,8 +47,9 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch,getState) => {
   localStorage.removeItem("userInfo");
+  getState().userDetails = {}
   dispatch({ type: USER_LOGOUT });
   //dispatch({type:'CART_EMPTY'})
 };

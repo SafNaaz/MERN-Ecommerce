@@ -70,3 +70,15 @@ html {
     right: 0;
     left: auto;
 }
+
+.desktop{
+    margin: 0;
+}
+
+.mobile{
+    margin: 0;
+}
+
+#profile-icon:link {
+    padding-right:0;
+}

@@ -38,14 +38,24 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               {/* Moves cart etc to left*/}
-              
+              <LinkContainer to="/cart">
+                <Nav.Link>
+                  {cartItems.length === 0 ? (
+                    <i className="fas fa-shopping-cart"></i>
+                  ) : (
+                    <i className="fa fa-cart-plus"></i>
+                  )}{" "}
+                  <span>Cart</span>
+                  {subTotal > 0 ? `(${subTotal})` : null}
+                </Nav.Link>
+              </LinkContainer>
               {userInfo ? (
                 <>
-                <Nav.Link>
-                  <LinkContainer to="/profile">
-                    <i className="fas fa-user"></i>
+                  <Nav.Link id="profile-icon">
+                    <LinkContainer to="/profile">
+                      <i className="fas fa-user"></i>
                     </LinkContainer>
-                    </Nav.Link>
+                  </Nav.Link>
                   <NavDropdown
                     className="desktop"
                     title={userInfo.name}
@@ -60,7 +70,7 @@ const Header = () => {
                     </NavDropdown.Item>
                   </NavDropdown>
 
-                  <NavDropdown title={''} className="mobile" id="username">
+                  <NavDropdown title={""} className="mobile" id="username">
                     <LinkContainer to="/profile">
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                     </LinkContainer>
@@ -77,17 +87,6 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  {cartItems.length === 0 ? (
-                    <i className="fas fa-shopping-cart"></i>
-                  ) : (
-                    <i className="fa fa-cart-plus"></i>
-                  )}{" "}
-                  <span>Cart</span>
-                  {subTotal > 0 ? `(${subTotal})` : null}
-                </Nav.Link>
-              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

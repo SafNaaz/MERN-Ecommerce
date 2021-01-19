@@ -12,6 +12,7 @@ const ProfileScreen = ({ location, history }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
+  const [profileUpdated, setProfileUpdated] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -29,6 +30,7 @@ const ProfileScreen = ({ location, history }) => {
       if (!user || !user.name || success) {
         dispatch({type: USER_UPDATE_PROFILE_RESET});
         dispatch(getUserDetails("profile"));
+        setProfileUpdated(success)
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -51,7 +53,7 @@ const ProfileScreen = ({ location, history }) => {
         <h2 className="profile">User Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
-        {success && <Message variant="success">Profile Updated</Message>}
+        {profileUpdated && <Message variant="success">Profile Updated</Message>}
         {loading ? (
           <Loader />
         ) : (

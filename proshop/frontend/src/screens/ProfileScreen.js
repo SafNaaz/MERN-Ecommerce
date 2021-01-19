@@ -13,6 +13,7 @@ const ProfileScreen = ({ location, history }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   const [profileUpdated, setProfileUpdated] = useState(false);
+  const [profileUpdateError, setProfileUpdateError] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -46,6 +47,7 @@ const ProfileScreen = ({ location, history }) => {
       setMessage("Passwords do not match");
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      setProfileUpdateError(updateError);
     }
   };
 
@@ -55,7 +57,7 @@ const ProfileScreen = ({ location, history }) => {
         <h2 className="profile">User Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
-        {updateError &&
+        {profileUpdateError && updateError &&
           (updateError.includes("email_1 dup key") ? (
             <Message variant="danger">{email} already exists</Message>
           ) : (

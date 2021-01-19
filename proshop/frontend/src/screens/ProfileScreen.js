@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
-import {USER_UPDATE_PROFILE_RESET} from '../constants/userConstants'
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -21,16 +21,18 @@ const ProfileScreen = ({ location, history }) => {
   const { loading, error, user } = userDetails;
 
   const { userInfo } = useSelector((state) => state.userLogin);
-  const { success } = useSelector((state) => state.userUpdateProfile);
+  const { success, updateError } = useSelector(
+    (state) => state.userUpdateProfile
+  );
 
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
     } else {
       if (!user || !user.name || success) {
-        dispatch({type: USER_UPDATE_PROFILE_RESET});
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
-        setProfileUpdated(success)
+        setProfileUpdated(success);
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -43,7 +45,7 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      dispatch(updateUserProfile({id: user._id, name, email, password}))
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
 
@@ -53,6 +55,12 @@ const ProfileScreen = ({ location, history }) => {
         <h2 className="profile">User Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
+        {updateError &&
+          (updateError.includes("email_1 dup key") ? (
+            <Message variant="danger">{email} already exists</Message>
+          ) : (
+            <Message variant="danger">{updateError}</Message>
+          ))}
         {profileUpdated && <Message variant="success">Profile Updated</Message>}
         {loading ? (
           <Loader />
@@ -81,7 +89,7 @@ const ProfileScreen = ({ location, history }) => {
             </Form.Group>
 
             <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>New Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Enter password"

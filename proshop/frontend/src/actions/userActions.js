@@ -15,6 +15,8 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
 } from "../constants/userConstants";
 
+// import {CART_EMPTY} from '../constants/cartConstants'
+
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -52,9 +54,9 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch,getState) => {
   localStorage.removeItem("userInfo");
-  getState().userDetails = {}
   dispatch({ type: USER_LOGOUT });
-  //dispatch({type:'CART_EMPTY'})
+  // localStorage.removeItem('cartItems')
+  // dispatch({type: CART_EMPTY});
 };
 
 export const register = (name, email, password) => async (dispatch, getState) => {
@@ -84,12 +86,6 @@ export const register = (name, email, password) => async (dispatch, getState) =>
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
-
-    //dispatch({type:'CART_EMPTY'})
-
-    getState().userRegister = {}
-    //getState().cart.cartItems = []
-    //localStorage.removeItem("cartItems");
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
@@ -162,15 +158,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       payload: data,
     });
 
-    // if(user.password){
-    //   localStorage.removeItem("userInfo");
-    //   getState().userDetails = {}
-    //   getState().userUpdateProfile = {}
-    //   dispatch({ type: USER_LOGOUT });
-    // }
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
 
-    getState().userDetails = {}
-    getState().userUpdateProfile = {}
+    localStorage.setItem('userInfo', JSON.stringify(data))
+
 
   } catch (error) {
     dispatch({

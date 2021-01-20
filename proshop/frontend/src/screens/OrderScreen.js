@@ -16,7 +16,7 @@ const OrderScreen = ({ history, match }) => {
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
-  if (!loading) {
+  if (!loading && !error) {
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
     };
@@ -37,9 +37,15 @@ const OrderScreen = ({ history, match }) => {
   }, [history, userInfo, dispatch, order, orderId]);
 
   return loading ? (
+      <>
+      <h1>Order</h1>
     <Loader />
+    </>
   ) : error ? (
+    <>
+    <h1>Order</h1>
     <Message variant="danger">{error}</Message>
+    </>
   ) : (
     <>
       <h1>Order</h1>

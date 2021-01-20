@@ -1,29 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({history}) => {
   const cart = useSelector((state) => state.cart);
 
-  const addDecimals = (num) =>{
-    return (Math.round(num * 100) /100).toFixed(2)
-}
+  const { userInfo } = useSelector((state) => state.userLogin);
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/login?redirect=placeorder");
+    }
+  });
+
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
 
   //calculate prices
-  cart.itemsPrice =  addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
+  cart.itemsPrice = addDecimals(
+    cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+  );
 
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100)
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
 
-  cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)))
+  cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
 
-  cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
+  cart.totalPrice = (
+    Number(cart.itemsPrice) +
+    Number(cart.shippingPrice) +
+    Number(cart.taxPrice)
+  ).toFixed(2);
 
-  const placeOrderHandler = () =>{
-      console.log('placed order')
-  }
+  const placeOrderHandler = () => {
+    console.log("placed order");
+  };
 
   return (
     <>
@@ -119,7 +133,9 @@ const PlaceOrderScreen = () => {
                   className="btn-block"
                   disabled={cart.cartItems === 0}
                   onClick={placeOrderHandler}
-                >Place Order</Button>
+                >
+                  Place Order
+                </Button>
               </ListGroup.Item>
             </ListGroup>
           </Card>
